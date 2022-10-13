@@ -1,0 +1,40 @@
+############################## DIRECTORY CONTENTS ##############################
+
+The "OneTurn" and "TwoTurns" directories contain the files necessary to
+visualize the trajectories using VMD:
+    - Two coordinate files (npt.gro and npt_prot.gro). npt.gro contains the 
+      whole system and npt_prot.gro, just the SK2+CaM coordinates.
+    - A trajectory file (md.xtc), which only contains the SK2+CaM coordinates,
+      and whose periodicity is not corrected.
+
+The "md.tpr" and "index.ndx" files are needed to analyze the trajectories with 
+standard Gromacs tools. The "plumed.dat" file is the Plumed input for the
+metadynamics runs, and the "sk2_cam.ndx" and the "reference.pdb" files are 
+called by "plumed.dat".
+
+The "Scripts" directory contains scripts to perform analyses and to
+generate plots. The comments in the scripts provide details on how to run them. 
+
+
+########################## "ONE TURN" AND "TWO TURNS" ##########################
+
+To correct the periodicity of the "one turn" and "two turns" trajectories 
+(md.xtc), use the provided correctPeriodicityMetad.sh script.
+
+To fix the HILLS file so that it does not contain repeated lines, use the
+provided fix-HILLS-COLVAR.sh script.
+
+To generate the last five free energy surfaces (which correspond to the last 
+250 ns) as a function of the chosen collective variable 
+[the (CaM)-(W431 Calpha)-(W431 aromatic ring) angle], use the provided 
+genFESMetad.sh script.
+
+Now, one can plot the time evolution of the collective variable and of the
+free energy surfaces (Figure S1 in the Supporting Information) by using the 
+provided plot_angle_fes.gpl Gnuplot script.
+
+To generate the average and standard deviation of the last five free energy 
+surfaces, use the provided compute_av_std_last_five_fes.sh script.
+
+Now, one can plot the final free energy surface with error bars (Figure 7) 
+by using the provided plot_fes_av_std_5.gpl Gnuplot script.

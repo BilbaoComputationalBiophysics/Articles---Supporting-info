@@ -1,0 +1,46 @@
+# Gnuplot script to plot the final free energy surface as a function of
+# the collective variable (CaM-W431 Calpha-W431 aromatic ring), which
+# is the average of the last five free energy surfaces (along the last 
+# 250 ns, one every 50 ns). The error bars are the standard deviation
+# over these five last surfaces.
+
+# To run this, execute gnuplot plot_fes_av_std_5.gpl
+
+set term pngcairo enhanced size 33.33cm,41.67cm 
+set output "pes_w431_av_std.png"
+set key font ",21"
+
+set multiplot layout 2,1 title "W431 orientation, free energy surface" font ",25"
+set xrange [0.0:pi]
+set xtics 0,1,3 font ",21" 
+unset xlabel
+set format x "%.1f"
+set label 2 "Towards\nCaM" at first 0.2,5.0 front font ",21" tc rgb "red" 
+set label 3 "Towards\nthe solvent" at first 2.5,5.0 front font ",21" tc \
+rgb "blue" 
+set yrange [0:12]
+set ytics 2,2,12 font ",21" 
+set ylabel "Free energy (kcal/mol)" offset -3,0 font ",21" 
+set format y "%.1f" 
+
+# One turn 
+set tmargin at screen 0.90; set bmargin at screen 0.60 
+set title "One turn" font ",25" 
+# Modify the input file names as needed
+plot "/scratch/rafael/CaMRecog/MetadW37Angle_S05_F/Metad/Test/fes_av_std_5.dat" \
+u 1:2 w l lw 4 lc rgb "#7012c1" notitle, \
+     "/scratch/rafael/CaMRecog/MetadW37Angle_S05_F/Metad/Test/fes_av_std_5.dat" \
+u 1:2:3 w yerrorbars lw 4 notitle 
+
+# Two turns
+set tmargin at screen 0.46; set bmargin at screen 0.16 
+set title "Two turns" 
+set xlabel "CaM-(W431 C{/Symbol a})-(W431 side chain) angle (rad)" offset 0,-1 font ",21"
+set label 2 at first 0.2,2.0 
+# Modify the input file names as needed
+plot "/scratch/rafael/CaMRecog/MetadW37Angle_S05_TwoTurns_F/Metad/Test/fes_av_std_5.dat" \
+u 1:2 w l lw 4 lc rgb "#7012c1" notitle, \
+     "/scratch/rafael/CaMRecog/MetadW37Angle_S05_TwoTurns_F/Metad/Test/fes_av_std_5.dat" \
+u 1:2:3 w yerrorbars lw 4 notitle 
+
+unset multiplot 
