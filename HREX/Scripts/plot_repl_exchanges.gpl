@@ -1,0 +1,45 @@
+# Gnuplot script to plot the time evolution
+# of the effective temperature index of each
+# replica. 
+# To run it, execute:
+# gnuplot plot_repl_exchanges.gpl
+
+set term pngcairo enhanced size 50cm,50cm 
+set output "HREX-exchanges.png"
+
+set xrange [0:200]
+set xlabel "Time (ns)" offset 0,-1 font ",18"
+set ylabel "Effective temperature index" offset -1,0 font ",18"
+set xtics font ",18"
+set ytics font ",18"
+set yrange [0:14]
+
+set multiplot layout 2,2
+
+set tmargin at screen 0.90; set bmargin at screen 0.60
+set label 1 "A" at graph 0.05,0.9 front font ",30"
+set title "CaM-SK2 (N421-T437, 1KKD)" font ",18" 
+# Modify the input directory as needed
+plot for [i=0:14:2] "/scratch/rafael/CaMRecog/SK227-43/Prod/replica_temp.xvg" \
+u ($1/1000):i+2 w l notitle 
+
+set label 1 "B" 
+set title "First CaM-SK2 (N421-T437, 1KKD) replica" 
+# Modify the input directory as needed
+plot for [i=0:0:2] "/scratch/rafael/CaMRecog/SK227-43/Prod/replica_temp.xvg" \
+u ($1/1000):i+2 w l notitle 
+
+set tmargin at screen 0.46; set bmargin at screen 0.16 
+set label 1 "C" 
+set title "CaM-SK2 (N421-T437, prev. sim.)" 
+# Modify the input directory as needed
+plot for [i=0:14:2] "/scratch/rafael/CaMRecog/SK2Prehelix/Prod/replica_temp.xvg" \
+u ($1/1000):i+2 w l notitle 
+
+set label 1 "D" 
+set title "First CaM-SK2 (N421-T437, prev. sim.) replica" 
+# Modify the input directory as needed
+plot for [i=0:0:2] "/scratch/rafael/CaMRecog/SK2Prehelix/Prod/replica_temp.xvg" \
+u ($1/1000):i+2 w l notitle 
+
+unset multiplot

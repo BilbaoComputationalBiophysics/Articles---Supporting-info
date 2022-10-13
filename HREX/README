@@ -1,0 +1,66 @@
+############################## DIRECTORY CONTENTS ##############################
+
+Each one of the "OneTurn", "TwoTurns", "OneTurnTRPOutward", "TwoTurnsTRPInward"
+and "AdditionalIQmotifs" directories contains the files needed to visualize the 
+trajectories using VMD:
+    - Two coordinate files (npt.gro and npt_prot.gro). npt.gro contains the whole 
+      system and npt_prot.gro, just the SK2+CaM coordinates.
+    - A trajectory file (md.xtc), which only contains the SK2+CaM coordinates,
+      and whose periodicity is not corrected.
+
+In addition, the "OneTurn", "TwoTurns", "OneTurnTRPOutward" and
+"TwoTurnsTRPInward" directories contain the md.log file, needed to generate
+the HREX exchanges plots (Figure S5 in the Supporting Information).
+
+The "md.tpr" and "index.ndx" files are needed to analyze the trajectories with 
+standard Gromacs tools.
+
+The "Scripts" directory contains scripts to perform analyses and to
+generate plots. The comments in the scripts provide details on how to run them. 
+
+
+########################## "ONE TURN" AND "TWO TURNS" ##########################
+
+To correct the periodicity of the "one turn" and "two turns" trajectories 
+(md.xtc),  (and their W431-rotated versions), and to compute the time evolution 
+of the SK2 secondary structure content, its RMSF and SASA per residue, and the 
+W431-CaM and L426/V427-CaM contacts, use the provided 
+pbc-SS-RMSF-SASA-contacts.sh script.
+
+This script generates the ss.xpm, rmsf_channel.xvg, sasaSK2.xvg, and 
+contactMap.xpm files. By using the provided plot_sscontent_vs_time.sh script,
+ one can generate the plots in Figures 2 and 5 (time evolution of secondary 
+structure content).
+
+To compute SASA differences between the "one turn" and "two turns"
+systems, use the provided compute_sasa_diffs.sh script, which generates
+sasaSK2diff.xvg. 
+
+To change the format of contactMap.xpm so that it can then 
+be plotted with Gnuplot, use the provided reformatXPMContactsFile.sh, which 
+generates contactMap.dat. To filter the W341 and L427/V26 contacts from
+contactMap.dat, use the provided extract-W431-L427-contacts.sh script.
+
+In the case of the W431-rotated versions of the trajectories, we analyzed the
+W431-CaM and V426/L427-CaM contacts over the frames where SK2 was in a fully 
+alpha-helical conformation. To extract these frames, use the provided
+list-helical-frames.sh and extract-helical-frames-contacts.sh scripts.  
+
+Now one can generate Figures 4 and 6 (RMSF, SASA, and contacts analysis).
+by using the provided plot_rmsf_sasa_contacts.gpl and 
+plot_rmsf_sasa_contacts_2.gpl Gnuplot scripts, respectively. 
+
+To compute the replica exchanges plotted in Figure S5, use the provided 
+demux_mod.pl script on the md.log files, followed by the provided
+correct_replica_index_temp.sh script 
+To plot Figure S5, use the provided plot_repl_exchanges.gpl Gnuplot script.
+
+
+############################# ADDITIONAL IQ MOTIFS #############################
+
+To correct the periodicity of the addtional IQ motifs trajectories and
+to compute the time evolution of their secondary structure, use the provided
+pbc-SS_iqmotifs.sh script
+
+To plot the result (Figures S3 and S4) use the provided 
+plot_sscontent_vs_time_additionalIQmotifs.sh script. 
