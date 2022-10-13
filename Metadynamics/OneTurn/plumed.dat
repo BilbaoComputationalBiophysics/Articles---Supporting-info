@@ -1,0 +1,45 @@
+# Remember to create empty HILLS and COLVAR files in case you are doing the first run with RESTART option.
+# <fill> = necessary an input.
+# <?> = necessary a file.
+RESTART
+
+# Groups.
+sk2: GROUP NDX_FILE=sk2_cam.ndx NDX_GROUP=SK2 
+cam: GROUP NDX_FILE=sk2_cam.ndx NDX_GROUP=Calmodulin 
+sk2_ca: GROUP NDX_FILE=sk2_cam.ndx NDX_GROUP=SK2-CA 
+cam_ca: GROUP NDX_FILE=sk2_cam.ndx NDX_GROUP=Calmodulin-CA 
+
+# Variables.
+sk2_center: CENTER ATOMS=sk2 
+cam_center: CENTER ATOMS=cam 
+sk2_ca_center: CENTER ATOMS=sk2_ca 
+cam_ca_center: CENTER ATOMS=cam_ca 
+w37ar: COM ATOMS=166,167,168,170,172,174 # W37's aromatic ring 
+
+# Avoid molecules being split by PBC
+WHOLEMOLECULES ENTITY0=1-1334 
+
+# Collective Variables
+angle: ANGLE ATOMS=cam_ca_center,156,w37ar # The angle is defined by CaM's alpha carbons' center of mass, 
+#W37's alpha carbon, and W37's aromatic ring center of mass. 
+
+# Funnel metadynamics
+lig: CENTER ATOMS=sk2_ca 
+
+fps: FUNNEL_PS LIGAND=lig REFERENCE=reference.pdb ANCHOR=790 POINTS=5.5,4.5,3.5,3.0,0.5,8.0 
+
+FUNNEL ARG=fps.lp,fps.ld ZCC=1.8 ALPHA=0.80 RCYL=0.1 MINS=-1.5 MAXS=5.0 KAPPA=35100 NBINS=500 NBINZ=500 FILE=BIAS LABEL=funnel
+
+# remove BIASFACTOR if you want to perform standard metadynamics
+METAD ...
+ARG=angle SIGMA=0.5 HEIGHT=2.0 PACE=500 TEMP=298 
+BIASFACTOR=20 FILE=HILLS GRID_MIN=0.0 GRID_MAX=pi GRID_BIN=2500 
+CALC_RCT RCT_USTRIDE=1 LABEL=metad_w 
+... METAD
+
+LOWER_WALLS ARG=fps.lp AT=-1.2 KAPPA=500000 EXP=2 OFFSET=0 LABEL=lwall
+
+UPPER_WALLS ARG=fps.lp AT=4.7 KAPPA=500000 EXP=2 OFFSET=0 LABEL=uwall
+
+PRINT STRIDE=1000 ARG=* FILE=COLVAR
+
