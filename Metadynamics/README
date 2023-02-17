@@ -25,16 +25,16 @@ To fix the HILLS file so that it does not contain repeated lines, use the
 provided fix-HILLS-COLVAR.sh script.
 
 To generate the last five free energy surfaces (which correspond to the last 
-250 ns) as a function of the chosen collective variable 
+200 ns) as a function of the chosen collective variable 
 [the (CaM)-(W431 Calpha)-(W431 aromatic ring) angle], use the provided 
 genFESMetad.sh script.
 
 Now, one can plot the time evolution of the collective variable and of the
-free energy surfaces (Figure S1 in the Supporting Information) by using the 
+free energy surfaces (Figure S2 in the Supporting Information) by using the 
 provided plot_angle_fes.gpl Gnuplot script.
 
 To generate the average and standard deviation of the last five free energy 
 surfaces, use the provided compute_av_std_last_five_fes.sh script.
 
-Now, one can plot the final free energy surface with error bars (Figure 7) 
+Now, one can plot the final free energy surface with error bars (Figure S1) 
 by using the provided plot_fes_av_std_5.gpl Gnuplot script.
