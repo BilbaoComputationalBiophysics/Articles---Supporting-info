@@ -1,7 +1,7 @@
 # Gnuplot script to plot the final free energy surface as a function of
 # the collective variable (CaM-W431 Calpha-W431 aromatic ring), which
 # is the average of the last five free energy surfaces (along the last 
-# 250 ns, one every 50 ns). The error bars are the standard deviation
+# 200 ns, one every 50 ns). The error bars are the standard deviation
 # over these five last surfaces.
 
 # To run this, execute gnuplot plot_fes_av_std_5.gpl
