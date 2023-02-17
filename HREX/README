@@ -10,7 +10,7 @@ trajectories using VMD:
 
 In addition, the "OneTurn", "TwoTurns", "OneTurnTRPOutward" and
 "TwoTurnsTRPInward" directories contain the md.log file, needed to generate
-the HREX exchanges plots (Figure S5 in the Supporting Information).
+the HREX exchanges plots (Figure S7 in the Supporting Information).
 
 The "md.tpr" and "index.ndx" files are needed to analyze the trajectories with 
 standard Gromacs tools.
@@ -29,7 +29,7 @@ pbc-SS-RMSF-SASA-contacts.sh script.
 
 This script generates the ss.xpm, rmsf_channel.xvg, sasaSK2.xvg, and 
 contactMap.xpm files. By using the provided plot_sscontent_vs_time.sh script,
- one can generate the plots in Figures 2 and 5 (time evolution of secondary 
+ one can generate the plots in Figures 2 and 6 (time evolution of secondary 
 structure content).
 
 To compute SASA differences between the "one turn" and "two turns"
@@ -46,14 +46,14 @@ W431-CaM and V426/L427-CaM contacts over the frames where SK2 was in a fully
 alpha-helical conformation. To extract these frames, use the provided
 list-helical-frames.sh and extract-helical-frames-contacts.sh scripts.  
 
-Now one can generate Figures 4 and 6 (RMSF, SASA, and contacts analysis).
+Now one can generate Figures 4 and 7 (RMSF, SASA, and contacts analysis).
 by using the provided plot_rmsf_sasa_contacts.gpl and 
 plot_rmsf_sasa_contacts_2.gpl Gnuplot scripts, respectively. 
 
-To compute the replica exchanges plotted in Figure S5, use the provided 
+To compute the replica exchanges plotted in Figure S7, use the provided 
 demux_mod.pl script on the md.log files, followed by the provided
 correct_replica_index_temp.sh script 
-To plot Figure S5, use the provided plot_repl_exchanges.gpl Gnuplot script.
+To plot Figure S7, use the provided plot_repl_exchanges.gpl Gnuplot script.
 
 
 ############################# ADDITIONAL IQ MOTIFS #############################
@@ -62,5 +62,5 @@ To correct the periodicity of the addtional IQ motifs trajectories and
 to compute the time evolution of their secondary structure, use the provided
 pbc-SS_iqmotifs.sh script
 
-To plot the result (Figures S3 and S4) use the provided 
+To plot the result (Figures S4 and S5) use the provided 
 plot_sscontent_vs_time_additionalIQmotifs.sh script. 
